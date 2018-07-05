@@ -77,8 +77,7 @@ class STM24_ReceiveThread(threading.Thread):
 
             if "EP" in asciiResp:
                 data = asciiResp.split("=")
-                print(data[1])
                 position = int(data[1], 16)
-                self.ui.position_label.setText(str(position % 360))
+                self.ui.position_label.setText(str(position))
 
 

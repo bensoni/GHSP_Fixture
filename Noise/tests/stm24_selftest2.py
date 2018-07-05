@@ -1,10 +1,12 @@
 from _test import Test
+import time
+
 
 class STM24_SelfTest2(Test):
     pass
 
     def name(self):
-        return "STM24 Self-Test #2"
+        return "Full Test"
 
 
     def load(self):
@@ -15,11 +17,23 @@ class STM24_SelfTest2(Test):
         
     def run_setup(self):
         # Basic stepper motor test.
-        self.stm24.sendCmd('AC25')
-        self.stm24.sendCmd('DE25')
-        self.stm24.sendCmd('VE5')
+        #self.stm24.sendCmd('MC2.5')
+        #self.stm24.sendCmd('CP3.0')
+        #self.stm24.sendCmd('GC100')
+        self.stm24.sendCmd('SF450')
+        self.stm24.sendCmd('EG51200')
+        self.stm24.sendCmd('MR15')
+        self.stm24.sendCmd('VE0.05')
+        self.stm24.sendCmd('AC20')
+        self.stm24.sendCmd('DE20')
 
     def run_rotateShifter(self):
-        self.stm24.sendCmd('FL5000')
+        self.stm24.sendCmd('MC')
+        #self.stm24.sendCmd('SH')
+        self.stm24.sendCmd('EP0')
+        self.stm24.sendCmd('VE0.05')
+        self.stm24.sendCmd('FP-10000')
+        self.stm24.sendCmd('WT1')
+        self.stm24.sendCmd('FP0')
 
     

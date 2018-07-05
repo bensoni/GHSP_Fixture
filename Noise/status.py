@@ -32,10 +32,10 @@ class StatusThread(threading.Thread):
 
             if self.status.getStmStatus():                
                 self.stm24.sendCmd("IT")
-                self.stm24.sendCmd("EP")
+                #self.stm24.sendCmd("EP")
                 self.ui.stm24Com_checkBox.setChecked(True)
             else:
                 self.ui.stm24Com_checkBox.setChecked(False)
             
 
-            time.sleep(0.5)
+            time.sleep(1)

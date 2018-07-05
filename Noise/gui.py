@@ -85,7 +85,6 @@ class Ui_MainWindow(object):
         self.position_label.setGeometry(QtCore.QRect(140, 100, 91, 41))
         self.position_label.setStyleSheet("font-size: 20px;")
         self.position_label.setObjectName("position_label")
-        self.position_label.setObjectName("position_label")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(140, 80, 91, 17))
         font = QtGui.QFont()
