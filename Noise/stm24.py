@@ -1,10 +1,13 @@
 from gui import Ui_MainWindow
 import socket
 import time
-import threading
 import binascii
+from PyQt5.QtCore import QObject, QThread, pyqtSignal, pyqtSlot
+from PyQt5.QtWidgets import QWidget
 
-class STM24(object):
+
+class STM24(QWidget):
+
 
     def __init__(self, services):
         (self.status, self.ui) = services
@@ -18,26 +21,39 @@ class STM24(object):
         self.STM_IP = "10.10.10.10"
         self.STM_PORT = 7775
 
-
+        
         # Attempt to connect to STM24 and send command.
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             self.sock.bind((self.UDP_IP, self.UDP_PORT))
             self.sock.connect((self.STM_IP, self.STM_PORT))
-            
-            # Step up thread to handle STM24 responses.
-            self.receiveThread = STM24_ReceiveThread(1, "STM24-IP", self.sock, self.ui)
-            self.receiveThread.start()
-            self.status.setStmStatus(True)
-
         except Exception:
             self.ui.diagnostics_textEdit.append("Failed to setup communication with STM24...")
             self.status.setStmStatus(False)
+    
+        # Step up thread to handle STM24 responses.
+
+        #self.receiveThread = QThread()
+        #self.obj = STM24_ReceiveThread(1, "STM24-IP", self.sock, self.ui)
+        #self.obj.moveToThread(self.receiveThread)
+        #self.obj.result.connect(self.stmRecStatus)
+        #self.receiveThread.start()
+
+        self.receiveThread = STM24_ReceiveThread(1, "STM24-IP", self.sock, self.ui)
+        #self.receiveThread.diagnosticsSignal.connect(self.diagnosticsResponse)
+        self.receiveThread.start()
+        self.status.setStmStatus(True)
 
     # Used to send data to the STM24
     def send(self, data):
         self.sock.sendto(bytes.fromhex(data), (self.STM_IP, self.STM_PORT))
+
+
+    #def stmRecStatus(self):
+     #   print("test")
+      #  self.ui.diagnostics_textEdit.append("Signal")
+        
 
     ##
     # sendCmd
@@ -50,19 +66,30 @@ class STM24(object):
         sendBytes = "0007"
         sendBytes = sendBytes + sclString + "0d"
         self.send(sendBytes)
-        
 
 
-class STM24_ReceiveThread(threading.Thread):
+class STM24_ReceiveThread(QThread):
+
+    #result = pyqtSignal()
+
     def __init__(self, threadID, threadName, sock, ui):
-        threading.Thread.__init__(self)
+        QThread.__init__(self)
         self.threadID = threadID
         self.name = threadName
         self.sock = sock
         self.ui = ui
+        self.ui.diagnostics_textEdit.append("Running")
+        #self.emitSomething()
+
+    #def emitSomething(self):
+     #   self.result.emit()
+      #  self.ui.diagnostics_textEdit.append("Attempted to signal")
+
+    #def __del__(self):
+        #self.wait()
 
     def run(self):
-
+        #self.result.emit()
         # Continue to receive responses from the STM24
         while True:
             response, addr = self.sock.recvfrom(1024)
@@ -79,5 +106,5 @@ class STM24_ReceiveThread(threading.Thread):
                 data = asciiResp.split("=")
                 position = int(data[1], 16)
                 self.ui.position_label.setText(str(position))
-
-
+            
+            #self.result.emit()

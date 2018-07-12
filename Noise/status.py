@@ -1,4 +1,4 @@
-import threading
+from PyQt5.QtCore import QThread
 import time
 
 class Status(object):
@@ -17,9 +17,9 @@ class Status(object):
 
 
     
-class StatusThread(threading.Thread):
+class StatusThread(QThread):
     def __init__(self, threadID, threadName, status, ui, stm24):
-        threading.Thread.__init__(self)
+        QThread.__init__(self)
         self.threadID = threadID
         self.name = threadName
         self.status = status

@@ -32,10 +32,10 @@ if __name__ == "__main__":
     stm24 = STM24((status, ui))
 
 
-    tests = Tests((status, ui, stm24))
+    #tests = Tests((status, ui, stm24))
 
     # Handles Events
-    events = EventHandler((app, status, ui, stm24, tests))
+    #events = EventHandler((app, status, ui, stm24, tests))
 
     # Start up a status thread. This monitors the system.
     statusThread = StatusThread(1, "SystemStatus", status, ui, stm24)

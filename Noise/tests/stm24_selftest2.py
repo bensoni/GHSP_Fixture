@@ -24,16 +24,16 @@ class STM24_SelfTest2(Test):
         self.stm24.sendCmd('EG51200')
         self.stm24.sendCmd('MR15')
         self.stm24.sendCmd('VE0.05')
-        self.stm24.sendCmd('AC20')
-        self.stm24.sendCmd('DE20')
+        self.stm24.sendCmd('AC0.1')
+        self.stm24.sendCmd('DE0.1')
 
     def run_rotateShifter(self):
         self.stm24.sendCmd('MC')
         #self.stm24.sendCmd('SH')
         self.stm24.sendCmd('EP0')
         self.stm24.sendCmd('VE0.05')
-        self.stm24.sendCmd('FP-10000')
-        self.stm24.sendCmd('WT1')
+        self.stm24.sendCmd('FP-9500')
+        #self.stm24.sendCmd('WT1')
         self.stm24.sendCmd('FP0')
 
     
