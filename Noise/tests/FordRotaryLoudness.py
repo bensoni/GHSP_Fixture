@@ -2,11 +2,11 @@ from _test import Test
 import time
 
 
-class STM24_SelfTest2(Test):
+class FordRotaryLoudness(Test):
     pass
 
     def name(self):
-        return "Full Test"
+        return "Ford Rotary Loudness"
 
 
     def load(self):

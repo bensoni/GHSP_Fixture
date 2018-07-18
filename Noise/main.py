@@ -23,7 +23,11 @@ if __name__ == "__main__":
 
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-	
+
+    # Adjust sequence table header columns
+    ui.sequence_tableWidget.setColumnWidth(0, 200)
+    ui.sequence_tableWidget.setColumnWidth(1, 200)
+
     # Handles CAN communication
     can = CAN((status, ui))
     can.setup()

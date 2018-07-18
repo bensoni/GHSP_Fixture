@@ -3,18 +3,21 @@ from stm24 import STM24
 
 
 # Import tests
-from tests import STM24_SelfTest
-from tests import STM24_SelfTest2
+from tests import FordRotaryLoudness
 
 class Tests(object):
     def __init__(self, services):
         (self.status, self.ui, self.stm24) = services
 
+        # Test list
         self.testList = [
-            STM24_SelfTest(services),
-            STM24_SelfTest2(services)
+            FordRotaryLoudness(services)
         ]
+
+        # Load up the first test to populate the test sequence table.
+        self.testList[0].load()
         
+        # Add each test to the combo box.
         for t in self.testList:
             self.ui.tests_comboBox.addItem(t.name())
 
