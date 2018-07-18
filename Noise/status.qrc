@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="check">
-    <file>check.png</file>
-  </qresource>
-  <qresource prefix="issue">
-    <file>issue.png</file>
-  </qresource>
-</RCC>

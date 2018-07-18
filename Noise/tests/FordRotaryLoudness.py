@@ -10,30 +10,28 @@ class FordRotaryLoudness(Test):
 
 
     def load(self):
-        sequence = [[ "Setup", self.run_setup, "Running setup..." ],
-                    [ "Rotating shifter", self.run_rotateShifter, " -- " ]]
+        sequence = [[ "Enable Motor", self.enable_motor, " -- " ],
+                    [ "Setup", self.setup, " -- "],
+                    [ "Park to Drive", self.park_to_drive, " -- " ],
+                    [ "Drive to Park", self.drive_to_park, " -- " ]]
         
         self.loadSequence(sequence)
+    
+    def enable_motor(self):
+        self.stm24.sendCmd('ME')
         
-    def run_setup(self):
-        # Basic stepper motor test.
-        #self.stm24.sendCmd('MC2.5')
-        #self.stm24.sendCmd('CP3.0')
-        #self.stm24.sendCmd('GC100')
-        self.stm24.sendCmd('SF450')
-        self.stm24.sendCmd('EG51200')
-        self.stm24.sendCmd('MR15')
-        self.stm24.sendCmd('VE0.05')
-        self.stm24.sendCmd('AC0.1')
-        self.stm24.sendCmd('DE0.1')
+    def setup(self):
+        # Basic stepper motor setup
+        self.stm24.sendCmd('VE0.2')
+        self.stm24.sendCmd('AC0.167')
+        self.stm24.sendCmd('DE0.167')
 
-    def run_rotateShifter(self):
-        self.stm24.sendCmd('MC')
-        #self.stm24.sendCmd('SH')
-        self.stm24.sendCmd('EP0')
-        self.stm24.sendCmd('VE0.05')
-        self.stm24.sendCmd('FP-9500')
-        #self.stm24.sendCmd('WT1')
-        self.stm24.sendCmd('FP0')
+    def park_to_drive(self):
+        self.stm24.sendCmd('DI-9500')
+        self.stm24.sendCmd('FL')
+
+    def drive_to_park(self):
+        self.stm24.sendCmd('DI9500')
+        self.stm24.sendCmd('FL')
 
     
