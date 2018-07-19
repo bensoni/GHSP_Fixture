@@ -1,6 +1,4 @@
 from _test import Test
-import time
-
 
 class FordRotaryLoudness(Test):
     pass
@@ -22,16 +20,16 @@ class FordRotaryLoudness(Test):
         
     def setup(self):
         # Basic stepper motor setup
-        self.stm24.sendCmd('VE0.2')
+        self.stm24.sendCmd('VE0.15')
         self.stm24.sendCmd('AC0.167')
         self.stm24.sendCmd('DE0.167')
 
     def park_to_drive(self):
         self.stm24.sendCmd('DI-9500')
-        self.stm24.sendCmd('FL')
+        self.stm24.sendCmd('FP')
 
     def drive_to_park(self):
-        self.stm24.sendCmd('DI9500')
-        self.stm24.sendCmd('FL')
+        self.stm24.sendCmd('DI0')
+        self.stm24.sendCmd('FP')
 
     

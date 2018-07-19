@@ -4,6 +4,7 @@ import time
 class Status(object):
     def __init__(self):
         self.isStmConnected = False
+        self.encoderPosition = 0
         
 
     def setStmStatus(self, isConnected):
@@ -11,6 +12,15 @@ class Status(object):
     
     def getStmStatus(self):
         return self.isStmConnected
+
+    def setEncoderPosition(self, position):
+        self.encoderPosition = position
+
+    def getEncoderPosotion(self):
+        return self.encoderPosition
+
+
+
 
 
 
@@ -32,10 +42,10 @@ class StatusThread(QThread):
 
             if self.status.getStmStatus():                
                 self.stm24.sendCmd("IT")
-                #self.stm24.sendCmd("EP")
+                self.stm24.sendCmd("SP")
                 self.ui.stm24Com_checkBox.setChecked(True)
             else:
                 self.ui.stm24Com_checkBox.setChecked(False)
             
 
-            time.sleep(1)
+            time.sleep(0.1)

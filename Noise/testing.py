@@ -4,6 +4,7 @@ from stm24 import STM24
 
 # Import tests
 from tests import FordRotaryLoudness
+from tests import ReturnToParkSetup
 
 class Tests(object):
     def __init__(self, services):
@@ -11,7 +12,8 @@ class Tests(object):
 
         # Test list
         self.testList = [
-            FordRotaryLoudness(services)
+            FordRotaryLoudness(services),
+            ReturnToParkSetup(services)
         ]
 
         # Load up the first test to populate the test sequence table.

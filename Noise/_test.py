@@ -23,10 +23,13 @@ class Test(object):
             self.ui.sequence_tableWidget.setItem(count, 1, QTableWidgetItem(s[2]))
 
     def run(self):
+        self.load()
+        
         # Executes the test provided by sequence.
         for index, s in enumerate(reversed(self.sequence)):
             s[1]()
             self.currentStep = index
+            self.updateStatus("Complete")
 
     def updateStatus(self, status):
         self.sequence[self.currentStep][2] = status
