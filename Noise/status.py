@@ -42,10 +42,10 @@ class StatusThread(QThread):
 
             if self.status.getStmStatus():                
                 self.stm24.sendCmd("IT")
-                self.stm24.sendCmd("SP")
+                self.stm24.sendCmd("RXe")
                 self.ui.stm24Com_checkBox.setChecked(True)
             else:
                 self.ui.stm24Com_checkBox.setChecked(False)
             
 
-            time.sleep(0.1)
+            time.sleep(0.05)

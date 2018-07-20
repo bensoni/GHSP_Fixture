@@ -170,7 +170,7 @@ class Ui_MainWindow(object):
         self.canCom_checkBox.setText(_translate("MainWindow", "CAN Communication"))
         self.brakeEngaged_checkBox.setText(_translate("MainWindow", "Brake Engaged"))
         self.position_label.setText(_translate("MainWindow", "--"))
-        self.label_12.setText(_translate("MainWindow", "Position"))
+        self.label_12.setText(_translate("MainWindow", "Encoder Position"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
 

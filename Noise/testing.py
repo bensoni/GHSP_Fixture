@@ -5,13 +5,18 @@ from stm24 import STM24
 # Import tests
 from tests import FordRotaryLoudness
 from tests import ReturnToParkSetup
+from tests import SeekHome
+from tests import Calibration
 
 class Tests(object):
     def __init__(self, services):
         (self.status, self.ui, self.stm24) = services
+        
 
         # Test list
         self.testList = [
+            Calibration(services),
+            SeekHome(services),
             FordRotaryLoudness(services),
             ReturnToParkSetup(services)
         ]

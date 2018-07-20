@@ -89,9 +89,10 @@ class STM24_ReceiveThread(QThread):
                 self.ui.temperature_label.setText(str(round(temp * 0.1, 2)))
                 #self.ui.diagnostics_textEdit.append("Temp: " + str(temp))
 
-            if "SP" in asciiResp:
+            if "RXe" in asciiResp:
+                #self.ui.diagnostics_textEdit.append("Received " + asciiResp + " from " + str(addr[0]) + ":" + str(addr[1]))
                 data = asciiResp.split("=")
-                position = int(data[1], 16)
+                position = int(data[1], 10)
                 self.ui.position_label.setText(str(position))
                 self.status.setEncoderPosition(position)
             

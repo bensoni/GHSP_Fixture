@@ -389,7 +389,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Position</string>
+     <string>Encoder Position</string>
     </property>
    </widget>
   </widget>

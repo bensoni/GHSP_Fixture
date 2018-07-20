@@ -9,26 +9,10 @@ class ReturnToParkSetup(Test):
 
 
     def load(self):
-        sequence = [[ "Enable Motor", self.enable_motor, " -- " ],
-                    [ "Set to drive position", self.setup, " -- "],
-                    [ "Disable Motor", self.disable_motor, " -- " ]]
+        sequence = [[ "Move to Drive", self.move_to_drive, " -- " ]]
         
         self.loadSequence(sequence)
     
-    def enable_motor(self):
-        self.ui.diagnostics_textEdit.append("Sending Motor Enable")
-        self.stm24.sendCmd('ME')
-        
-    def setup(self):
-        # Basic stepper motor setup
-        self.ui.diagnostics_textEdit.append("Feed to position")
-        self.stm24.sendCmd('DI-9500')
-        self.stm24.sendCmd('FP')
-        time.sleep(5)
-
-
-    def disable_motor(self):
-        self.ui.diagnostics_textEdit.append("Sending Motor Disable")
-        self.stm24.sendCmd('MD')
-
+    def move_to_drive(self):
+        self.stm24.sendCmd('QX4')
     

@@ -22,6 +22,7 @@ class EventHandler(object):
         getTest.load()
 
     def on_runButtonClick(self):
+        #self.ui.run_pushButton.setEnabled(false);
         index = self.ui.tests_comboBox.currentIndex()
         getTest = self.testing.getTestList()[index]
         self.ui.diagnostics_textEdit.append(str(getTest.name()))
