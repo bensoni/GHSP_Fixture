@@ -1,6 +1,7 @@
-from gui import Ui_MainWindow
-from stm24 import STM24
-
+#############################################################
+# Populates UI with available tests and allows the user to
+# select between tests using a drop-down.
+#############################################################
 
 # Import tests
 from tests import FordRotaryLoudness
@@ -9,11 +10,14 @@ from tests import SeekHome
 from tests import Calibration
 
 class Tests(object):
+
+    ##
+    # Constructor for Tests class
+    # @param services Injected UI and STM24 services
     def __init__(self, services):
         (self.status, self.ui, self.stm24) = services
         
-
-        # Test list
+        # List of available tests
         self.testList = [
             Calibration(services),
             SeekHome(services),
@@ -28,6 +32,9 @@ class Tests(object):
         for t in self.testList:
             self.ui.tests_comboBox.addItem(t.name())
 
+    ##
+    # Get Test List - Returns a list of the available tests.
+    #
     def getTestList(self):
         return self.testList
 
