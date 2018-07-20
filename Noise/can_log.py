@@ -117,3 +117,5 @@ class CAN_ReceiveThread(threading.Thread):
                 bus.shutdown()
         except KeyboardInterrupt:
             pass
+        finally:
+            self.ui.diagnostics_textEdit.append("Failed to set up CAN Communication...")
