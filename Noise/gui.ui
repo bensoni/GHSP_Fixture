@@ -241,6 +241,9 @@
        <height>17</height>
       </rect>
      </property>
+	 <property name="enabled">
+      <bool>false</bool>
+	 </property>
      <property name="text">
       <string>STM24 Communication</string>
      </property>
@@ -324,7 +327,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>CAN</string>
+     <string>CAN Status</string>
     </property>
     <widget class="QCheckBox" name="canCom_checkBox">
      <property name="geometry">
@@ -334,6 +337,9 @@
        <width>131</width>
        <height>17</height>
       </rect>
+     </property>
+	 <property name="enabled">
+      <bool>false</bool>
      </property>
      <property name="text">
       <string>CAN Communication</string>
@@ -347,12 +353,15 @@
       <rect>
        <x>30</x>
        <y>64</y>
-       <width>111</width>
+       <width>140</width>
        <height>17</height>
       </rect>
      </property>
+	 <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
-      <string>Brake Engaged</string>
+      <string>Brake Engaged Status</string>
      </property>
     </widget>
    </widget>
