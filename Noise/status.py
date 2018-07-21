@@ -8,6 +8,7 @@ import time
 class Status(object):
     def __init__(self):
         self.isStmConnected = False
+        self.lastTime = time.time()
 
     ##
     # Set STM24 Status
@@ -23,6 +24,15 @@ class Status(object):
     def getStmStatus(self):
         return self.isStmConnected
 
+    def updateLastPacketTime(self):
+        self.lastTime = time.time()
+
+    def getLastPacketTime(self):
+        return self.lastTime
+    
+    def isStmOnline(self):
+        return self.lastTime > (time.time() - 1)
+
 
 ##
 # Status Thread
@@ -30,15 +40,20 @@ class Status(object):
 # commands over CAN or UDP.
 #
 class StatusThread(QThread):
-    def __init__(self, threadID, threadName, stm24):
+    def __init__(self, threadID, threadName, stm24, status, ui):
         QThread.__init__(self)
         self.threadID = threadID
         self.name = threadName
         self.stm24 = stm24
+        self.status = status
+        self.ui = ui
 
     def run(self):
         while True:
             self.stm24.sendCmd("IT")
             self.stm24.sendCmd("RXe")
-            
+
+        
+            self.ui.stm24Com_checkBox.setChecked(self.status.isStmOnline())
+
             time.sleep(0.05)

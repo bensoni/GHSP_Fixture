@@ -12,7 +12,6 @@ class EventHandler(object):
         self.ui.run_pushButton.clicked.connect(self.on_runButtonClick)
         self.ui.actionQuit.triggered.connect(self.on_actionQuit)
         self.ui.tests_comboBox.currentIndexChanged.connect(self.on_testChange)
-        self.ui.stop_pushButton.clicked.connect(self.on_stopButtonClick)
 
     ##
     # On Test Change
@@ -21,7 +20,6 @@ class EventHandler(object):
     #
     def on_testChange(self):
         index = self.ui.tests_comboBox.currentIndex()
-        self.ui.diagnostics_textEdit.append(str(index))
         getTest = self.testing.getTestList()[index]
         getTest.load()
 
