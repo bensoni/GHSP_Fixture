@@ -42,7 +42,7 @@ if __name__ == "__main__":
     events = EventHandler((app, ui, tests, stm24))
 
     # Start up a status thread. This monitors the system.
-    statusThread = StatusThread(1, "SystemStatus", stm24)
+    statusThread = StatusThread(1, "SystemStatus", stm24, status, ui)
     statusThread.start()
 
     MainWindow.show()

@@ -3,6 +3,7 @@
 # and its methods.
 #############################################################
 from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
+import ctypes
 
 class Test(object):
 
@@ -28,7 +29,6 @@ class Test(object):
         self.ui.sequence_tableWidget.setRowCount(0)
 
         count = self.ui.sequence_tableWidget.rowCount()
-        self.ui.diagnostics_textEdit.append(str(count))
 
         # Update with new test sequence
         for s in reversed(self.sequence):
@@ -43,12 +43,20 @@ class Test(object):
     #
     def run(self):
         self.load()
-        
-        # Executes the test provided by sequence.
-        for index, s in enumerate(reversed(self.sequence)):
-            s[1]()
-            self.currentStep = index
-            self.updateStatus("Complete")
+
+        # Check to see if communication with the stepper motor is possible.
+        if self.status.isStmOnline() is False:
+            ctypes.windll.user32.MessageBoxW(0, "Unable to connect to stepper motor. Please check connection.", "STM Communication Error", 0)
+        else:
+            # Check to make sure brake is engaged.
+            if self.ui.brakeEngaged_checkBox.isChecked() is False:
+                ctypes.windll.user32.MessageBoxW(0, "Brake must be engaged to perform any tests.", "Brake Engaged Error", 0)
+            else:
+                # Executes the test provided by sequence.
+                for index, s in enumerate(reversed(self.sequence)):
+                    s[1]()
+                    self.currentStep = index
+                    self.updateStatus("Complete")
 
     ##
     # Update Status

@@ -99,4 +99,7 @@ class STM24_ReceiveThread(QThread):
                 data = asciiResp.split("=")
                 position = int(data[1], 10)
                 self.ui.position_label.setText(str(position))
+
+
+            self.status.updateLastPacketTime()
             
