@@ -2,13 +2,14 @@
 # Interface for every test. Each test should extend this class
 # and its methods.
 #############################################################
-from PyQt5.QtWidgets import QTableWidget,QTableWidgetItem
+from PyQt5.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QMessageBox
 import ctypes
 
-class Test(object):
+class Test(QWidget):
 
     def __init__(self, services):
         (self.status, self.ui, self.stm24) = services
+        super().__init__()
 
     ##
     # Load Sequence
@@ -50,13 +51,14 @@ class Test(object):
         else:
             # Check to make sure brake is engaged.
             if self.ui.brakeEngaged_checkBox.isChecked() is False:
-                ctypes.windll.user32.MessageBoxW(0, "Brake must be engaged to perform any tests.", "Brake Engaged Error", 0)
-            else:
-                # Executes the test provided by sequence.
-                for index, s in enumerate(reversed(self.sequence)):
-                    s[1]()
-                    self.currentStep = index
-                    self.updateStatus("Complete")
+                proceed = QMessageBox.question(self, "Brake Engaged Error", "Brake should be engaged to perform this test. Proceed anyway?", QMessageBox.Yes | QMessageBox.No)
+
+                if proceed == QMessageBox.Yes:
+                    # Executes the test provided by sequence.
+                    for index, s in enumerate(reversed(self.sequence)):
+                        s[1]()
+                        self.currentStep = index
+                        self.updateStatus("Complete")
 
     ##
     # Update Status

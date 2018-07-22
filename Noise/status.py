@@ -24,12 +24,29 @@ class Status(object):
     def getStmStatus(self):
         return self.isStmConnected
 
+    ##
+    # Update Last Packet Time
+    # Updates the last packet time with the current time. This is
+    # used to determine if the host is still receiving packets from
+    # the STM24.
+    #
     def updateLastPacketTime(self):
         self.lastTime = time.time()
 
+    ##
+    # Get Last Packet Time
+    # Retrieves the last packet time.
+    # @return The last packet time in seconds.
+    #
     def getLastPacketTime(self):
         return self.lastTime
     
+    ##
+    # Is STM24 Online
+    # Determines if the host is still receiving packets from the STM24
+    # based on the last packet that was recieved.
+    # @return Status of STM24 communication.
+    #
     def isStmOnline(self):
         return self.lastTime > (time.time() - 1)
 
