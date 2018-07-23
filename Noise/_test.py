@@ -59,6 +59,12 @@ class Test(QWidget):
                         s[1]()
                         self.currentStep = index
                         self.updateStatus("Complete")
+            else:
+                # Executes the test provided by sequence.
+                for index, s in enumerate(reversed(self.sequence)):
+                    s[1]()
+                    self.currentStep = index
+                    self.updateStatus("Complete")
 
     ##
     # Update Status
